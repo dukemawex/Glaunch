@@ -3,9 +3,14 @@ import type { UserPlan } from './types'
 
 /**
  * Paddle (Sandbox / test mode) server client.
- * Auth via PADDLE_API_KEY. All checkouts run against the sandbox environment,
- * so the test card 4242 4242 4242 4242 (any future expiry, any CVC) approves
- * instantly.
+ *
+ * Auth is via PADDLE_API_KEY only. We intentionally do NOT require pre-created
+ * Paddle catalog price IDs — instead each checkout builds an inline
+ * "non-catalog" price + product on the fly. That means the only secret you
+ * need is the sandbox API key.
+ *
+ * All checkouts run against the sandbox environment, so the Paddle test card
+ * 4242 4242 4242 4242 (any future expiry, any CVC) approves instantly.
  */
 let paddleClient: Paddle | null = null
 
@@ -21,23 +26,56 @@ export function getPaddle(): Paddle {
 
 export type PlanId = Exclude<UserPlan, 'free'>
 
-/** Maps an app plan to its Paddle sandbox price ID. */
-export function priceIdForPlan(plan: PlanId): string {
-  const map: Record<PlanId, string | undefined> = {
-    recruiter: process.env.PADDLE_RECRUITER_PRICE_ID,
-    premium: process.env.PADDLE_PREMIUM_PRICE_ID,
+/** Display + billing metadata for each paid plan. Amounts are in USD cents. */
+const PLAN_CONFIG: Record<
+  PlanId,
+  { name: string; description: string; amountCents: string }
+> = {
+  premium: {
+    name: 'Glaunch Premium Student',
+    description:
+      'Unlimited smart matches, unlimited interview coaching, AI resume rewrites, and priority application visibility.',
+    amountCents: '500', // $5.00 / month
+  },
+  recruiter: {
+    name: 'Glaunch Recruiter',
+    description:
+      'Post unlimited jobs, AI-ranked candidate pipeline, applicant analytics, and team seats.',
+    amountCents: '1000', // $10.00 / month
+  },
+}
+
+/**
+ * Builds the `items` array for a transaction. If a catalog price ID env var is
+ * present we use it; otherwise we fall back to an inline non-catalog price so
+ * checkout works with just the API key.
+ */
+function itemsForPlan(plan: PlanId) {
+  const envPriceId =
+    plan === 'recruiter'
+      ? process.env.PADDLE_RECRUITER_PRICE_ID
+      : process.env.PADDLE_PREMIUM_PRICE_ID
+
+  if (envPriceId) {
+    return [{ priceId: envPriceId, quantity: 1 }]
   }
-  const priceId = map[plan]
-  if (!priceId) {
-    throw new Error(
-      `No Paddle price configured for the ${plan} plan. Set ${
-        plan === 'recruiter'
-          ? 'PADDLE_RECRUITER_PRICE_ID'
-          : 'PADDLE_PREMIUM_PRICE_ID'
-      }.`,
-    )
-  }
-  return priceId
+
+  const cfg = PLAN_CONFIG[plan]
+  return [
+    {
+      quantity: 1,
+      price: {
+        name: cfg.name,
+        description: cfg.description,
+        unitPrice: { amount: cfg.amountCents, currencyCode: 'USD' as const },
+        billingCycle: { interval: 'month' as const, frequency: 1 },
+        product: {
+          name: cfg.name,
+          taxCategory: 'standard' as const,
+        },
+      },
+    },
+  ]
 }
 
 /**
@@ -52,7 +90,7 @@ export async function createCheckout(input: {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
 
   const transaction = await paddle.transactions.create({
-    items: [{ priceId: priceIdForPlan(input.plan), quantity: 1 }],
+    items: itemsForPlan(input.plan),
     customData: { userId: input.userId, plan: input.plan, email: input.email },
     ...(appUrl
       ? { checkout: { url: `${appUrl}/dashboard?upgraded=true` } }
@@ -61,7 +99,10 @@ export async function createCheckout(input: {
 
   const url = transaction.checkout?.url
   if (!url) {
-    throw new Error('Paddle did not return a checkout URL.')
+    throw new Error(
+      'Paddle did not return a checkout URL. In the Paddle dashboard, set ' +
+        'Checkout > Settings > Default payment link to your app URL.',
+    )
   }
   return url
 }

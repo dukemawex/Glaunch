@@ -1,5 +1,5 @@
 import { getAuthedUser, unauthorized } from '@/lib/api-auth'
-import { createCheckout, type PlanId } from '@/lib/lemonsqueezy'
+import { createCheckout, type PlanId } from '@/lib/paddle'
 
 export const runtime = 'nodejs'
 
@@ -21,7 +21,11 @@ export async function POST(req: Request) {
       )
     }
 
-    const url = await createCheckout(authed.userId, authed.email, planId as PlanId)
+    const url = await createCheckout({
+      userId: authed.userId,
+      email: authed.email,
+      plan: planId as PlanId,
+    })
     return Response.json({ url })
   } catch (err) {
     console.log('[v0] checkout error:', (err as Error).message)
