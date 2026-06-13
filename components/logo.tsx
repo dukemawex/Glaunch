@@ -6,7 +6,7 @@ export function LogoMark({ className }: { className?: string }) {
       viewBox="0 0 32 32"
       className={cn('size-7', className)}
       role="img"
-      aria-label="AfriLaunch logo"
+      aria-label="Glaunch logo"
       fill="none"
     >
       {/* orange rocket / upward triangle */}
@@ -30,8 +30,8 @@ export function Logo({
     <span className={cn('inline-flex items-center gap-2', className)}>
       <LogoMark className={markClassName} />
       <span className="text-lg font-black tracking-tight">
-        <span className="text-foreground">Afri</span>
-        <span className="text-brand-orange">Launch</span>
+        <span className="text-foreground">G</span>
+        <span className="text-brand-orange">launch</span>
       </span>
     </span>
   )

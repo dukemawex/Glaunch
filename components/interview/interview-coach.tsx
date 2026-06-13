@@ -194,7 +194,10 @@ export function InterviewCoach({ matches }: { matches: MatchRecord[] }) {
           We&apos;ll generate five tailored questions for the position you pick.
         </p>
         <div className="mt-6 max-w-md">
-          <Select value={selectedId} onValueChange={setSelectedId}>
+          <Select
+            value={selectedId}
+            onValueChange={(v) => setSelectedId(v ?? '')}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a matched role" />
             </SelectTrigger>
