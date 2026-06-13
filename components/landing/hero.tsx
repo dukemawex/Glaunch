@@ -105,7 +105,7 @@ export function Hero() {
         </div>
 
         <p className="mt-7 text-sm text-muted-foreground">
-          Free forever for students · No credit card required · 54 countries
+          Free forever for students · No credit card required · 190+ countries
         </p>
       </div>
     </section>

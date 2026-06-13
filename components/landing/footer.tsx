@@ -18,7 +18,7 @@ const COLUMNS = [
       { label: 'About', href: '/#features' },
       { label: 'Careers', href: '/#pricing' },
       { label: 'Blog', href: '/#features' },
-      { label: 'Contact', href: 'mailto:hello@afrilaunch.io' },
+      { label: 'Contact', href: 'mailto:hello@glaunch.io' },
     ],
   },
   {
@@ -34,9 +34,9 @@ const COLUMNS = [
 
 const SOCIALS = [
   { label: 'X', icon: X, href: 'https://x.com' },
-  { label: 'Website', icon: Globe, href: 'https://afrilaunch.io' },
+  { label: 'Website', icon: Globe, href: 'https://glaunch.io' },
   { label: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/' },
-  { label: 'Email', icon: Mail, href: 'mailto:hello@afrilaunch.io' },
+  { label: 'Email', icon: Mail, href: 'mailto:hello@glaunch.io' },
 ]
 
 export function Footer() {
@@ -47,8 +47,8 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-xs text-pretty text-sm text-muted-foreground">
-              Your career, launched. AI-powered tools built for African
-              students and graduates.
+              Your career, launched. AI-powered tools built for students and
+              graduates worldwide.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {SOCIALS.map((s) => {
@@ -90,7 +90,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © 2026 AfriLaunch. Made for Africa, with Africa.
+            © 2026 Glaunch. Built for students everywhere.
           </p>
           <p className="font-mono text-sm text-brand-orange">
             Your career, launched.

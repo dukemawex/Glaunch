@@ -8,7 +8,7 @@ export const runtime = 'nodejs'
 export const maxDuration = 60
 
 const SYSTEM =
-  'You are an expert resume analyst for African student and graduate job seekers.'
+  'You are an expert resume analyst for student and graduate job seekers worldwide.'
 
 async function extractText(file: File): Promise<string> {
   const buffer = Buffer.from(await file.arrayBuffer())

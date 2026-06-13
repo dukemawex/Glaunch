@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'AfriLaunch — Your career, launched.',
+  title: 'Glaunch — Your career, launched.',
   description:
-    'AfriLaunch reads your resume, scores it like a real ATS, matches you to internships and entry-level roles, and coaches you through interviews — AI built for African students and graduates.',
+    'Glaunch reads your resume, scores it like a real ATS, matches you to internships and entry-level roles, and coaches you through interviews — AI built for students and graduates worldwide.',
   generator: 'v0.app',
 }
 

@@ -5,7 +5,7 @@ import { Footer } from '@/components/landing/footer'
 import { PricingPlans } from '@/components/pricing-plans'
 
 export const metadata: Metadata = {
-  title: 'Pricing — AfriLaunch',
+  title: 'Pricing — Glaunch',
   description:
     'Free forever for students. Affordable premium coaching and recruiter plans. Your career, launched.',
 }

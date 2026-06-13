@@ -10,7 +10,7 @@ export default function SignUpPage() {
       </Link>
       <div className="text-center">
         <h1 className="text-2xl font-black tracking-tight">
-          Create your AfriLaunch account
+          Create your Glaunch account
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Your career, launched. Free forever for students.

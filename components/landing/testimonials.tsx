@@ -14,7 +14,7 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      'AfriLaunch rewrote my resume and my ATS score jumped from 54 to 89. Two weeks later I had an internship offer at a fintech in Lagos.',
+      'Glaunch rewrote my resume and my ATS score jumped from 54 to 89. Two weeks later I had an internship offer at a fintech.',
     name: 'Amara Okafor',
     role: 'Software Engineering Intern',
     country: 'Nigeria',
@@ -22,23 +22,23 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       'I stopped spraying applications everywhere. Smart Matching showed me where I actually fit and my response rate tripled.',
-    name: 'Zanele Dlamini',
+    name: 'Sofia Reyes',
     role: 'Product Designer',
-    country: 'South Africa',
+    country: 'Mexico',
   },
   {
     quote:
       'The interview coach asked me questions I actually got asked in my real interview. I went in prepared.',
-    name: 'Kwame Asante',
+    name: 'Arjun Mehta',
     role: 'Data Analyst',
-    country: 'Ghana',
+    country: 'India',
   },
   {
     quote:
       'Got my first job offer 3 weeks after signing up. The AI resume rewrite was the game changer.',
-    name: 'Fatima Al-Hassan',
+    name: 'Lena Kowalski',
     role: 'Operations Analyst',
-    country: 'Kenya',
+    country: 'Poland',
   },
 ]
 
@@ -64,7 +64,7 @@ export function Testimonials() {
           Real Launches
         </p>
         <h2 className="mt-3 text-balance text-3xl font-black tracking-tight md:text-5xl">
-          Careers launched across the continent
+          Careers launched around the world
         </h2>
 
         <div className="relative mt-12">

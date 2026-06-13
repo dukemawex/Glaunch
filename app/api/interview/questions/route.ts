@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       return Response.json({ error: 'A job title is required.' }, { status: 400 })
     }
 
-    const prompt = `Generate 5 interview questions for a ${jobTitle} role at an African tech company.${
+    const prompt = `Generate 5 interview questions for a ${jobTitle} role at a modern tech company.${
       body.description ? ` Role context: ${body.description.slice(0, 1500)}` : ''
     } Mix behavioral and technical. Return ONLY valid JSON array:
 [{"id": string, "question": string, "type": "behavioral"|"technical"|"situational", "tip": string}]`

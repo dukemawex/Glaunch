@@ -7,9 +7,9 @@ const STATS = [
 ]
 
 const TOP_MATCHES = [
-  { title: 'Frontend Engineer', company: 'Paystack', score: 94 },
-  { title: 'Data Analyst', company: 'Flutterwave', score: 88 },
-  { title: 'Product Designer', company: 'Andela', score: 81 },
+  { title: 'Frontend Engineer', company: 'Stripe', score: 94 },
+  { title: 'Data Analyst', company: 'Shopify', score: 88 },
+  { title: 'Product Designer', company: 'Canva', score: 81 },
 ]
 
 export function DashboardPreview() {
@@ -32,7 +32,7 @@ export function DashboardPreview() {
           </div>
           <div className="flex flex-1 items-center justify-center gap-2 rounded-md bg-background/60 px-3 py-1.5 text-xs text-muted-foreground">
             <Lock className="size-3" />
-            app.afrilaunch.io/dashboard
+            app.glaunch.io/dashboard
           </div>
         </div>
 

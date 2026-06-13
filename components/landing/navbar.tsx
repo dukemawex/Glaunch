@@ -20,7 +20,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" aria-label="AfriLaunch home">
+        <Link href="/" aria-label="Glaunch home">
           <Logo />
         </Link>
 
