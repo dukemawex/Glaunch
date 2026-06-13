@@ -207,7 +207,7 @@ export function OnboardingForm({
               value={university}
               onChange={(e) => setUniversity(e.target.value)}
               className={inputClass}
-              placeholder="University of Lagos"
+              placeholder="e.g. University of Toronto"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
