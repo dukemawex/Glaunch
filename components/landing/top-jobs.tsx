@@ -4,9 +4,9 @@ import { SEED_JOBS } from '@/lib/seed-data'
 
 // Three representative real roles with illustrative fit scores for the preview.
 const PREVIEW = [
-  { jobId: 'job-stripe-frontend-engineer', score: 94 },
-  { jobId: 'job-shopify-data-analyst', score: 88 },
-  { jobId: 'job-canva-product-designer', score: 81 },
+  { jobId: 'job-stripe-software-engineer', score: 94 },
+  { jobId: 'job-figma-product-designer', score: 88 },
+  { jobId: 'job-vercel-frontend-engineer', score: 81 },
 ]
 
 export function TopJobs() {

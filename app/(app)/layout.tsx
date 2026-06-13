@@ -30,7 +30,7 @@ export default async function AppLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      <AppNav plan={user.plan} />
+      <AppNav />
       <div className="mx-auto max-w-7xl px-4 py-8">{children}</div>
     </div>
   )

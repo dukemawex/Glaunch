@@ -9,14 +9,11 @@ import {
   Target,
   Send,
   MessageSquare,
-  Briefcase,
-  Users,
-  BarChart3,
 } from 'lucide-react'
 import { Logo } from '@/components/logo'
 import { cn } from '@/lib/utils'
 
-const STUDENT_LINKS = [
+const LINKS = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/resume', label: 'Resume AI', icon: FileText },
   { href: '/matches', label: 'Matches', icon: Target },
@@ -24,16 +21,8 @@ const STUDENT_LINKS = [
   { href: '/interview', label: 'Interview', icon: MessageSquare },
 ]
 
-const RECRUITER_LINKS = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/recruiter/jobs', label: 'Post Jobs', icon: Briefcase },
-  { href: '/recruiter/pipeline', label: 'Pipeline', icon: Users },
-  { href: '/recruiter/analytics', label: 'Analytics', icon: BarChart3 },
-]
-
-export function AppNav({ plan = 'free' }: { plan?: string }) {
+export function AppNav() {
   const pathname = usePathname()
-  const LINKS = plan === 'recruiter' ? RECRUITER_LINKS : STUDENT_LINKS
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">

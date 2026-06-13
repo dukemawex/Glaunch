@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
 import Link from 'next/link'
 import { Navbar } from '@/components/landing/navbar'
 import { Footer } from '@/components/landing/footer'
 import { PricingPlans } from '@/components/pricing-plans'
-import { PricingUpgradeToast } from '@/components/pricing-upgrade-toast'
 
 export const metadata: Metadata = {
   title: 'Pricing — Glaunch',
@@ -15,9 +13,6 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <Suspense fallback={null}>
-        <PricingUpgradeToast />
-      </Suspense>
       <Navbar />
       <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-28 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'
 import {
@@ -12,8 +11,6 @@ import {
 } from 'lucide-react'
 import { getUser, getMatches, getApplications, getSessions } from '@/lib/data'
 import { cn } from '@/lib/utils'
-import { DashboardUpgradeToast } from '@/components/dashboard-upgrade-toast'
-import { RecruiterDashboard } from '@/components/recruiter/recruiter-dashboard'
 
 const STATUS_STYLES: Record<string, string> = {
   applied: 'bg-brand-green/15 text-brand-green',
@@ -25,20 +22,8 @@ export default async function DashboardPage() {
   const { userId } = await auth()
   if (!userId) redirect('/sign-in')
 
-  const user = await getUser(userId)
-
-  if (user?.plan === 'recruiter') {
-    return (
-      <>
-        <Suspense fallback={null}>
-          <DashboardUpgradeToast />
-        </Suspense>
-        <RecruiterDashboard userId={userId} fullName={user.fullName} />
-      </>
-    )
-  }
-
-  const [matches, applications, sessions] = await Promise.all([
+  const [user, matches, applications, sessions] = await Promise.all([
+    getUser(userId),
     getMatches(userId),
     getApplications(userId),
     getSessions(userId),
@@ -63,9 +48,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Suspense fallback={null}>
-        <DashboardUpgradeToast />
-      </Suspense>
       <div>
         <p className="text-sm font-bold uppercase tracking-widest text-brand-green">
           Your Command Center

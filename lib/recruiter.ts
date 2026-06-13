@@ -126,9 +126,9 @@ export async function getRecruiterData(
     analytics: {
       skills: toSorted(skillCounts, 8),
       countries: toSorted(countryCounts, 8),
-      volume: toSorted(volumeCounts).sort((a, b) =>
-        a.name.localeCompare(b.name),
-      ),
+      volume: toSorted(volumeCounts)
+        .map((v) => ({ date: v.name, count: v.count }))
+        .sort((a, b) => a.date.localeCompare(b.date)),
     },
     stats: {
       totalJobs: jobs.length,

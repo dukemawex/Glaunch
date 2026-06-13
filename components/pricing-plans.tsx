@@ -52,7 +52,7 @@ const PLANS: Plan[] = [
   {
     id: 'recruiter',
     name: 'Recruiter',
-    price: '$10',
+    price: '$49',
     cadence: '/month',
     features: [
       'Post unlimited jobs',

@@ -14,31 +14,31 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      'Glaunch rewrote my resume and my ATS score jumped from 54 to 89. Two weeks later I had an internship offer at a fintech.',
-    name: 'Amara Okafor',
+      'Glaunch rewrote my resume and my ATS score jumped from 52 to 91. I landed a remote internship at a European startup within a month.',
+    name: 'Priya Sharma',
     role: 'Software Engineering Intern',
-    country: 'Nigeria',
+    country: 'India',
   },
   {
     quote:
-      'I stopped spraying applications everywhere. Smart Matching showed me where I actually fit and my response rate tripled.',
-    name: 'Sofia Reyes',
+      'I stopped applying blindly. Smart Matching showed me roles where I actually had a shot and my response rate tripled.',
+    name: 'Carlos Mendez',
     role: 'Product Designer',
     country: 'Mexico',
   },
   {
     quote:
-      'The interview coach asked me questions I actually got asked in my real interview. I went in prepared.',
-    name: 'Arjun Mehta',
+      'The interview coach asked questions I actually got in my real interview. I walked in prepared and got the offer.',
+    name: 'Yuki Tanaka',
     role: 'Data Analyst',
-    country: 'India',
+    country: 'Japan',
   },
   {
     quote:
-      'Got my first job offer 3 weeks after signing up. The AI resume rewrite was the game changer.',
-    name: 'Lena Kowalski',
+      'Got my first international job offer 3 weeks after signing up. The AI resume rewrite was the game changer.',
+    name: 'Aisha Rahman',
     role: 'Operations Analyst',
-    country: 'Poland',
+    country: 'Bangladesh',
   },
 ]
 

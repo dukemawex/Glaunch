@@ -1,6 +1,5 @@
 import { getAuthedUser, unauthorized } from '@/lib/api-auth'
-import { getUser } from '@/lib/data'
-import { createCheckout, type PlanId } from '@/lib/paddle'
+import { createCheckout, type PlanId } from '@/lib/lemonsqueezy'
 
 export const runtime = 'nodejs'
 
@@ -15,23 +14,15 @@ export async function POST(req: Request) {
       return Response.json({ error: 'Invalid plan selected.' }, { status: 400 })
     }
 
-    // Pull the freshest email from the user's DynamoDB profile, falling back
-    // to the Clerk email.
-    const profile = await getUser(authed.userId)
-    const email = profile?.email || authed.email
-    if (!email) {
+    if (!authed.email) {
       return Response.json(
         { error: 'A verified email is required to start checkout.' },
         { status: 400 },
       )
     }
 
-    const checkoutUrl = await createCheckout({
-      userId: authed.userId,
-      email,
-      plan: planId as PlanId,
-    })
-    return Response.json({ checkoutUrl, url: checkoutUrl })
+    const url = await createCheckout(authed.userId, authed.email, planId as PlanId)
+    return Response.json({ url })
   } catch (err) {
     console.log('[v0] checkout error:', (err as Error).message)
     return Response.json(
