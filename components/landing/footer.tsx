@@ -92,6 +92,14 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © 2026 Glaunch. Built for students everywhere.
           </p>
+          <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
+            <span className="inline-flex h-5 items-center rounded-full bg-foreground px-1.5 font-mono text-[10px] font-bold text-background">
+              v0
+            </span>
+            <span className="text-xs font-medium text-muted-foreground">
+              Built for the v0 × AWS Hackathon
+            </span>
+          </div>
           <p className="font-mono text-sm text-brand-orange">
             Your career, launched.
           </p>

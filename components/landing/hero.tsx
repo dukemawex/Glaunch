@@ -58,8 +58,25 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(232,93,39,0.16),transparent_70%)]"
       />
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm text-brand-orange">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(70%_50%_at_50%_0%,black,transparent)] bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:44px_44px]"
+      />
+      <div className="mx-auto flex max-w-5xl flex-col items-center px-4 pt-16 pb-16 text-center sm:px-6 sm:pt-20">
+        <a
+          href="https://v0.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur transition-colors hover:border-brand-orange/50 hover:text-foreground"
+        >
+          <span className="inline-flex h-5 items-center rounded-full bg-foreground px-1.5 font-mono text-[10px] font-bold text-background">
+            v0
+          </span>
+          Built for the v0 × AWS Hackathon
+          <span className="text-brand-orange">→</span>
+        </a>
+
+        <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm text-brand-orange">
           <Sparkles className="size-3.5" />
           AI-powered career launchpad for students worldwide
         </span>
@@ -107,6 +124,24 @@ export function Hero() {
         <p className="mt-7 text-sm text-muted-foreground">
           Free forever for students · No credit card required · 190+ countries
         </p>
+
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground/70">
+            Powered by
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {['Amazon Bedrock', 'DynamoDB', 'Next.js', 'Clerk', 'Vercel'].map(
+              (tech) => (
+                <span
+                  key={tech}
+                  className="text-sm font-semibold text-muted-foreground/80"
+                >
+                  {tech}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
       </div>
     </section>
   )
