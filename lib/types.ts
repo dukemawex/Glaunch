@@ -76,6 +76,8 @@ export interface JobRecord {
   sector: string
   postedAt: string
   isActive: boolean
+  /** Set when a recruiter posted this job from the recruiter dashboard. */
+  recruiterId?: string
 }
 
 export interface ApplicationRecord {

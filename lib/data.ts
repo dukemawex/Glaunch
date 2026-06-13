@@ -4,6 +4,7 @@ import {
   queryByPK,
   queryGSI,
   updateItem,
+  scanByEntity,
   keys,
   JOB_GSI1PK,
 } from './dynamodb'
@@ -124,6 +125,36 @@ export async function getActiveJobs(): Promise<JobRecord[]> {
 export async function getJob(jobId: string): Promise<JobRecord | null> {
   const items = await queryByPK(keys.jobPk(jobId))
   return clean<JobRecord>(items[0] ?? null)
+}
+
+/** All jobs posted by a specific recruiter, newest first. */
+export async function getRecruiterJobs(
+  recruiterId: string,
+): Promise<JobRecord[]> {
+  const items = await queryGSI(JOB_GSI1PK)
+  return cleanList<JobRecord>(items)
+    .filter((j) => j.recruiterId === recruiterId)
+    .sort((a, b) => b.postedAt.localeCompare(a.postedAt))
+}
+
+/* ------------------- Recruiter aggregate views ----------------- */
+
+/** Every application across all students (recruiter pipeline source). */
+export async function getAllApplications(): Promise<ApplicationRecord[]> {
+  const items = await scanByEntity('APPLICATION')
+  return cleanList<ApplicationRecord>(items)
+}
+
+/** Every match across all students (used to attach AI match scores). */
+export async function getAllMatches(): Promise<MatchRecord[]> {
+  const items = await scanByEntity('MATCH')
+  return cleanList<MatchRecord>(items)
+}
+
+/** Every user profile (used for applicant country / name / skills). */
+export async function getAllUsers(): Promise<UserRecord[]> {
+  const items = await scanByEntity('USER')
+  return cleanList<UserRecord>(items)
 }
 
 /* ------------------------- Applications ------------------------ */

@@ -5,6 +5,7 @@ import {
   GetCommand,
   QueryCommand,
   UpdateCommand,
+  ScanCommand,
 } from '@aws-sdk/lib-dynamodb'
 import { awsCredentialsProvider } from '@vercel/functions/oidc'
 
@@ -120,6 +121,35 @@ export async function queryGSI<T = Record<string, unknown>>(
     }),
   )
   return (result.Items as T[]) ?? []
+}
+
+/**
+ * Scan the whole table for items of a given entity type (e.g. "APPLICATION",
+ * "MATCH", "USER"). Used by the recruiter dashboard to aggregate across all
+ * students. Paginates through every page. Fine for hackathon-scale data; for
+ * production you'd back these views with a dedicated GSI.
+ */
+export async function scanByEntity<T = Record<string, unknown>>(
+  entity: string,
+): Promise<T[]> {
+  const items: T[] = []
+  let lastKey: Record<string, unknown> | undefined
+
+  do {
+    const result = await getClient().send(
+      new ScanCommand({
+        TableName: TABLE_NAME,
+        FilterExpression: '#entity = :entity',
+        ExpressionAttributeNames: { '#entity': 'entity' },
+        ExpressionAttributeValues: { ':entity': entity },
+        ExclusiveStartKey: lastKey,
+      }),
+    )
+    if (result.Items) items.push(...(result.Items as T[]))
+    lastKey = result.LastEvaluatedKey as Record<string, unknown> | undefined
+  } while (lastKey)
+
+  return items
 }
 
 /**
