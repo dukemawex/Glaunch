@@ -59,6 +59,8 @@ export interface ResumeRecord {
   aiRewriteExperience: string
   aiRewriteSkills: string
   scoreBreakdown: string
+  missingKeywords?: string
+  weakSections?: string
   uploadedAt: string
 }
 

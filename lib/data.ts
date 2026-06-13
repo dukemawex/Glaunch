@@ -54,6 +54,35 @@ export async function updateUser(
   return clean<UserRecord>(item)
 }
 
+/** Create a baseline user record on first sign-in if none exists yet. */
+export async function upsertUserBootstrap(input: {
+  userId: string
+  email: string
+  fullName: string
+}): Promise<UserRecord> {
+  const existing = await getUser(input.userId)
+  if (existing) return existing
+
+  const user: UserRecord = {
+    userId: input.userId,
+    email: input.email,
+    fullName: input.fullName,
+    country: '',
+    university: '',
+    graduationYear: '',
+    fieldOfStudy: '',
+    role: 'student',
+    plan: 'free',
+    atsScore: 0,
+    profileComplete: 0,
+    resumeText: '',
+    extractedSkills: '[]',
+    createdAt: new Date().toISOString(),
+  }
+  await putUser(user)
+  return user
+}
+
 /* --------------------------- Resumes --------------------------- */
 
 export async function putResume(resume: ResumeRecord): Promise<void> {

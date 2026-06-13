@@ -15,9 +15,10 @@ async function extractText(file: File): Promise<string> {
   const name = file.name.toLowerCase()
 
   if (name.endsWith('.pdf')) {
-    const { default: pdfParse } = await import('pdf-parse')
-    const data = await pdfParse(buffer)
-    return data.text
+    const { PDFParse } = await import('pdf-parse')
+    const parser = new PDFParse({ data: new Uint8Array(buffer) })
+    const result = await parser.getText()
+    return result.text
   }
   if (name.endsWith('.docx')) {
     const mammoth = await import('mammoth')
@@ -100,6 +101,8 @@ Resume text: ${rawText.slice(0, 12000)}`
       aiRewriteExperience: JSON.stringify(analysis.rewrite?.experience ?? []),
       aiRewriteSkills: JSON.stringify(analysis.rewrite?.skills ?? []),
       scoreBreakdown: JSON.stringify(analysis.scoreBreakdown ?? {}),
+      missingKeywords: JSON.stringify(analysis.missingKeywords ?? []),
+      weakSections: JSON.stringify(analysis.weakSections ?? []),
       uploadedAt: new Date().toISOString(),
     }
     await putResume(resume)
